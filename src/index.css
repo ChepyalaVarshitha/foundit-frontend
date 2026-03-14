@@ -1,0 +1,21 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global body */
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F6F4EB;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+}
+
+/* Root container */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}

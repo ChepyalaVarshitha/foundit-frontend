@@ -1,0 +1,122 @@
+.signup-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F6F4EB;
+  padding: 40px 20px;
+}
+
+.signup-title {
+  text-align: center;
+  color: #749BC2;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.signup-form {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.signup-form label {
+  font-weight: bold;
+  color: #2b4552;
+  display: block;
+  margin-top: 12px;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 2px solid #a0c8e0;
+  font-size: 1rem;
+}
+
+/* Password eye icon */
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-pass {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.error-text {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.signup-btn {
+  width: 100%;
+  background-color: #749BC2;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background-color: #5e8cb0;
+}
+
+.switch-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.switch-link a {
+  color: #749BC2;
+  font-weight: bold;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-box {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: #2b4552;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.close-btn {
+  background-color: #749BC2;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  margin-top: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close-btn:hover {
+  background-color: #5e8cb0;
+}

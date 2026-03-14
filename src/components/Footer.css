@@ -1,0 +1,23 @@
+.footer {
+  width: 100%;
+  background-color: #96c4dd;
+  margin-top: 40px;
+  padding: 18px 0;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+.footer-inner {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2b4552;
+}

@@ -1,0 +1,86 @@
+.found-page {
+  background-color: #F6F4EB;
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* Page title */
+.found-title {
+  color: #749BC2;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* Card container */
+.found-items-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Blue Cards */
+.found-card {
+  background-color: #A6C8DF;   /* same as search cards */
+  padding: 20px;
+  border-radius: 12px;
+  text-align: left;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.found-card h3 {
+  margin-bottom: 5px;
+  color: #2c3e50;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.found-card p {
+  margin: 0;
+  color: #333;
+}
+
+/* Dropdown */
+.dropdown {
+  margin-top: 25px;
+}
+
+.dropbtn {
+  background-color: #94b9d6;
+  color: #333;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  margin-top: 10px;
+  background-color: white;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  padding: 8px 0;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.dropdown-content a:hover {
+  background-color: #f2f2f2;
+}

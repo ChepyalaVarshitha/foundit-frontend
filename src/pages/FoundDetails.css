@@ -1,0 +1,84 @@
+.found-detail-page {
+  background: #F6F4EB;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Card style same as Lost Details */
+.found-detail-card {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Heading style same */
+.found-detail-card h2 {
+  color: #749BC2;
+  margin-bottom: 15px;
+}
+
+/* Text style */
+.found-detail-card p {
+  margin: 8px 0;
+  color: #2c3e50;
+  line-height: 1.4;
+}
+
+/* Image match lost details */
+.found-detail-image {
+  width: 100%;
+  margin: 15px 0;
+  border-radius: 10px;
+}
+
+/* Back button same as lost details */
+.back-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  background-color: #749BC2;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-btn:hover {
+  background-color: #5e8cb0;
+}
+
+/* Loading / error same style */
+.loading, .error {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1.2rem;
+}
+
+/* Remove underline from card links */
+.found-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.claim-btn {
+  display: inline-block;
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 10px 18px;
+  background-color: #e67373;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.claim-btn:hover {
+  background-color: #cc5c5c;
+}

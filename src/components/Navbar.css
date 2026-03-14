@@ -1,0 +1,75 @@
+/* Navbar container */
+.navbar-wrapper {
+  width: 100%;
+  background-color: #96c4dd; 
+  padding: 10px 0;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Inner container */
+.navbar {
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2b4552; 
+}
+
+/* Nav menu */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+/* Hover + active look */
+nav a:hover,
+nav a.active {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #2b4552;
+}
+
+/* User section */
+
+.nav-username {
+  font-weight: bold;
+  color: #2b4552;
+  margin-right: 10px;
+}
+
+.logout-btn {
+  background: #749BC2;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-btn:hover {
+  background: #5e8cb0;
+}

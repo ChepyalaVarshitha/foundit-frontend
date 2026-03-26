@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./LostDetails.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function LostItemDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ export default function LostItemDetails() {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const response = await fetch(`http://localhost:8080api/lost-items/${id}`);
+        const response = await fetch(`${API_URL}/lost-items/${id}`);
         const data = await response.json();
         setItem(data);
       } catch (error) {
@@ -33,9 +35,9 @@ export default function LostItemDetails() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080api/lost-items/${id}/claim`,
+        `${API_URL}/lost-items/${id}/claim`,
         {
-          method: "PATCH",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -68,9 +70,9 @@ export default function LostItemDetails() {
       <div className="details-card">
         <h2>{item.title}</h2>
 
-        {item.photo && (
+        {item.image && (
           <img
-            src={`http://localhost:8080/api/uploads/${item.photo}`}
+            src={`${API_URL}/uploads/${item.image}`}
             alt="Lost Item"
             className="details-image"
           />
@@ -78,12 +80,12 @@ export default function LostItemDetails() {
 
         <p><strong>Description:</strong> {item.description}</p>
         <p><strong>Location Lost:</strong> {item.location}</p>
-        <p><strong>Owner Name:</strong> {item.name}</p>
-        <p><strong>Phone:</strong> {item.phone}</p>
-        <p><strong>Date Lost:</strong> {item.date_lost}</p>
+        <p><strong>Owner Name:</strong> {item.contactName || "Not provided"}</p>
+        <p><strong>Phone:</strong> {item.phoneNumber || "Not provided"}</p>
+        <p><strong>Date Lost:</strong> {item.date ? new Date(item.date).toLocaleDateString() : "Not provided"}</p>
 
-        {/*  Show Claim Button ONLY if not already claimed AND user is logged in */}
-        {user && item.claimed === 0 && (
+        {/* Show Claim Button ONLY if not already claimed AND user is logged in */}
+        {user && !item.claimed && (
           <button className="claim-btn" onClick={handleClaim}>
             Mark as Claimed
           </button>

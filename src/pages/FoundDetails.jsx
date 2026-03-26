@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./FoundDetails.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function FoundItemDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ export default function FoundItemDetails() {
   useEffect(() => {
     async function fetchItem() {
       try {
-        const response = await fetch(`http://localhost:8080api/found-items/${id}`);
+        const response = await fetch(`${API_URL}/found-items/${id}`);
         if (!response.ok) throw new Error("Item not found");
 
         const data = await response.json();
@@ -37,8 +39,8 @@ export default function FoundItemDetails() {
     setClaiming(true);
 
     try {
-      const response = await fetch(`http://localhost:8080api/found-items/${id}/claim`, {
-        method: "PATCH",
+      const response = await fetch(`${API_URL}/found-items/${id}/claim`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" }
       });
 
@@ -55,6 +57,7 @@ export default function FoundItemDetails() {
 
     } catch (error) {
       alert("Something went wrong.");
+      setClaiming(false);
     }
   }
 
@@ -69,13 +72,13 @@ export default function FoundItemDetails() {
 
         <p><strong>Description:</strong> {item.description}</p>
         <p><strong>Location:</strong> {item.location}</p>
-        <p><strong>Finder Name:</strong> {item.name || "Not provided"}</p>
-        <p><strong>Phone:</strong> {item.phone}</p>
-        <p><strong>Date Found:</strong> {item.date_found}</p>
+        <p><strong>Finder Name:</strong> {item.contactName || "Not provided"}</p>
+        <p><strong>Phone:</strong> {item.phoneNumber || "Not provided"}</p>
+        <p><strong>Date Found:</strong> {item.date ? new Date(item.date).toLocaleDateString() : "Not provided"}</p>
 
-        {item.photo && (
+        {item.image && (
           <img
-            src={`http://localhost:8080/api/uploads/${item.photo}`}
+            src={`${API_URL}/uploads/${item.image}`}
             alt="Found item"
             className="details-image"
           />

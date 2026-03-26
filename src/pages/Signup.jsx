@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function Signup() {
   const navigate = useNavigate();
 
@@ -49,7 +51,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/signup", {
+      const response = await fetch(`${API_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password })
@@ -58,7 +60,7 @@ export default function Signup() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || "Signup failed");
+        setError(data.message || data.error || "Signup failed");
         return;
       }
 
@@ -74,6 +76,7 @@ export default function Signup() {
       });
 
     } catch (err) {
+      console.error("Signup error:", err);
       setError("Something went wrong. Please try again.");
     }
   };

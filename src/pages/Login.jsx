@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function Login() {
   const navigate = useNavigate();
 
@@ -21,7 +23,7 @@ export default function Login() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -30,7 +32,7 @@ export default function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.message || "Invalid email or password.");
+        setError(data.message || data.error || "Invalid email or password.");
         return;
       }
 
@@ -41,14 +43,15 @@ export default function Login() {
       localStorage.setItem("user", JSON.stringify(data.user));
 
       // ⭐ Save USERNAME separately (for navbar)
-      localStorage.setItem("username", data.user.name);
+      localStorage.setItem("username", data.user?.name || email);
 
       // ⭐ Save User ID if needed later
-      localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("userId", data.user?.id);
 
       setSuccess(true);
 
     } catch (err) {
+      console.error("Login error:", err);
       setError("Something went wrong. Try again.");
     }
   };

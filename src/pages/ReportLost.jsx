@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ReportLost.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function ReportLost() {
   const navigate = useNavigate();
 
@@ -48,22 +50,21 @@ export default function ReportLost() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/lost-items", {
-            method: "POST",
-                 headers: { 
-                         "Content-Type": "application/json",
-                           "Authorization": "Bearer " + localStorage.getItem("token") 
-                    },
-             body: JSON.stringify({
-    title: formData.title,
-    description: formData.description,
-    location: formData.location,
-    phone: formData.phone,
-    name: formData.name,
-    date_lost: formData.date_lost
-  })
-});
-
+      const response = await fetch(`${API_URL}/lost-items`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token") 
+        },
+        body: JSON.stringify({
+          title: formData.title,
+          description: formData.description,
+          location: formData.location,
+          phoneNumber: formData.phone,      // ← matches backend field name
+          contactName: formData.name,        // ← matches backend field name
+          date: formData.date_lost           // ← matches backend field name (date, not date_lost)
+        })
+      });
 
       const data = await response.json();
 
@@ -86,6 +87,7 @@ export default function ReportLost() {
 
     } catch (error) {
       alert("Something went wrong. Try again.");
+      console.error(error);
     }
   };
 
@@ -94,11 +96,10 @@ export default function ReportLost() {
     navigate("/lost-items");
   };
 
-    if (!localStorage.getItem("token")) {
-  window.location.href = "/login";
-  return;
-}
-
+  if (!localStorage.getItem("token")) {
+    window.location.href = "/login";
+    return null;
+  }
 
   return (
     <div className="lost-form-page">
@@ -110,12 +111,10 @@ export default function ReportLost() {
         <input
           type="text"
           name="title"
-          value={formData.title}   // 🔥 FIXED
+          value={formData.title}
           onChange={handleChange}
           placeholder="Enter lost item name"
         />
-
-        
 
         <label>Description:</label>
         <textarea
@@ -157,7 +156,7 @@ export default function ReportLost() {
         <input
           type="date"
           name="date_lost"
-          value={formData.date_lost}   // 🔥 FIXED
+          value={formData.date_lost}
           onChange={handleChange}
         />
 

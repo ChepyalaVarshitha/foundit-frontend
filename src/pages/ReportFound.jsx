@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ReportFound.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function ReportFound() {
   const navigate = useNavigate();
 
@@ -46,23 +48,25 @@ export default function ReportFound() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/found-items", {
+      const response = await fetch(`${API_URL}/found-items`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token") 
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token") 
         },
         body: JSON.stringify({
           title: formData.item,
           description: formData.description,
           location: formData.location,
-          phone: formData.phone,
-          name: formData.name,
+          phoneNumber: formData.phone,      // ← matches backend field name
+          contactName: formData.name,        // ← matches backend field name
           date_found: formData.date
         })
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to submit");
       }
 
       // Show popup
@@ -85,16 +89,15 @@ export default function ReportFound() {
       }, 1500);
 
     } catch (error) {
-      alert("Failed to submit. Check server.");
+      alert("Failed to submit: " + error.message);
       console.error(error);
     }
   };
 
-              if (!localStorage.getItem("token")) {
-                    window.location.href = "/login";
-  return;
-}
-
+  if (!localStorage.getItem("token")) {
+    window.location.href = "/login";
+    return null;
+  }
 
   return (
     <div className="lost-form-page">
@@ -169,11 +172,9 @@ export default function ReportFound() {
         <div className="popup">
           <div className="popup-box">
             <p>Found Item Report Submitted Successfully ✔</p>
-             <button className="close-btn" onClick={() => {setSuccess(false);navigate("/found-items");}}>
-                     OK
+            <button className="close-btn" onClick={() => {setSuccess(false); navigate("/found-items");}}>
+              OK
             </button>
-
-          
           </div>
         </div>
       )}

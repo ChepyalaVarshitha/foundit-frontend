@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./LostItems.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function LostItems() {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([]);
@@ -11,7 +13,7 @@ export default function LostItems() {
   useEffect(() => {
     const fetchLostItems = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/lost-items");
+        const response = await fetch(`${API_URL}/lost-items`);
         const data = await response.json();
         setItems(data);
       } catch (error) {
@@ -32,27 +34,21 @@ export default function LostItems() {
       {loading && <p>Loading items...</p>}
 
       <div className="lost-items-container">
-        
-
-        {!loading &&
-        items.map((item) => (
-        <Link
-          to={`/lost/${item.id}`}
-             key={item.id}
+        {!loading && items.map((item) => (
+          <Link
+            to={`/lost/${item.id}`}
+            key={item.id}
             className="lost-card-link"
-    >
-              <div className="lost-card">
-               <h3>{item.title}</h3>
-                <p>{item.description}</p>
-
-                 <p><strong>Location:</strong> {item.location}</p>
-                   <p><strong>Owner:</strong> {item.name}</p>
-                     <p><strong>Date:</strong> {item.date_lost}</p>
-              </div>
-         </Link>
-  ))
-}
-
+          >
+            <div className="lost-card">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <p><strong>Location:</strong> {item.location}</p>
+              <p><strong>Owner:</strong> {item.contactName || "Not provided"}</p>
+              <p><strong>Date:</strong> {item.date ? new Date(item.date).toLocaleDateString() : "Not provided"}</p>
+            </div>
+          </Link>
+        ))}
       </div>
 
       {/* Dropdown */}

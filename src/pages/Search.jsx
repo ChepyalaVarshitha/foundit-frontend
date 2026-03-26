@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Search.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function Search() {
   const [searchText, setSearchText] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -13,11 +15,11 @@ export default function Search() {
   useEffect(() => {
     async function loadRecent() {
       try {
-        const res = await fetch("http://localhost:8080api/search/recent");
+        const res = await fetch(`${API_URL}/search/recent`);
         const data = await res.json();
         setRecent(data);
       } catch (err) {
-        console.error("Failed to load recent items");
+        console.error("Failed to load recent items", err);
       }
     }
     loadRecent();
@@ -36,12 +38,12 @@ export default function Search() {
 
     try {
       const res = await fetch(
-        `http://localhost:8080api/search?q=${text}`
+        `${API_URL}/search?q=${encodeURIComponent(text)}`
       );
       const data = await res.json();
       setItems(data);
     } catch (err) {
-      console.error("Search failed");
+      console.error("Search failed", err);
     }
 
     setLoading(false);

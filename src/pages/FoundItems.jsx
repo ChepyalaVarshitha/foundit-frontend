@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./FoundItems.css";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+
 export default function FoundItems() {
   const [open, setOpen] = useState(false);
   const [foundItems, setFoundItems] = useState([]);
@@ -12,7 +14,7 @@ export default function FoundItems() {
   useEffect(() => {
     async function fetchItems() {
       try {
-        const response = await fetch("http://localhost:8080/api/found-items");
+        const response = await fetch(`${API_URL}/found-items`);
         if (!response.ok) {
           throw new Error("Failed to fetch items.");
         }
